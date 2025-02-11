@@ -1766,7 +1766,7 @@ def ocr(image: np.ndarray) -> List[Dict[str, Any]]:
         files={"images": buffer_bytes},
         data={"language": "en"},
         headers={"contentType": "multipart/form-data", "apikey": _API_KEY},
-    )
+    timeout=60)
 
     if res.status_code != 200:
         raise ValueError(f"OCR request failed with status code {res.status_code}")

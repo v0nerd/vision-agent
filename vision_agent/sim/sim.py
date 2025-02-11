@@ -246,8 +246,8 @@ class OllamaSim(Sim):
 
         def emb_call(text: List[str]) -> List[float]:
             resp = requests.post(
-                base_url, json={"prompt": text[0], "model": model_name}
-            )
+                base_url, json={"prompt": text[0], "model": model_name}, 
+            timeout=60)
             return resp.json()["embedding"]  # type: ignore
 
         self.emb_call = emb_call

@@ -312,7 +312,7 @@ class OllamaLMM(LMM):
             json_data = json.dumps(data)
 
             def f() -> Iterator[Optional[str]]:
-                with requests.post(url, data=json_data, stream=True) as stream:
+                with requests.post(url, data=json_data, stream=True, timeout=60) as stream:
                     if stream.status_code != 200:
                         raise ValueError(
                             f"Request failed with status code {stream.status_code}"
@@ -329,7 +329,7 @@ class OllamaLMM(LMM):
         else:
             data["stream"] = False
             json_data = json.dumps(data)
-            resp = requests.post(url, data=json_data)
+            resp = requests.post(url, data=json_data, timeout=60)
 
             if resp.status_code != 200:
                 raise ValueError(f"Request failed with status code {resp.status_code}")
@@ -360,7 +360,7 @@ class OllamaLMM(LMM):
             json_data = json.dumps(data)
 
             def f() -> Iterator[Optional[str]]:
-                with requests.post(url, data=json_data, stream=True) as stream:
+                with requests.post(url, data=json_data, stream=True, timeout=60) as stream:
                     if stream.status_code != 200:
                         raise ValueError(
                             f"Request failed with status code {stream.status_code}"
@@ -377,7 +377,7 @@ class OllamaLMM(LMM):
         else:
             data["stream"] = False
             json_data = json.dumps(data)
-            resp = requests.post(url, data=json_data)
+            resp = requests.post(url, data=json_data, timeout=60)
 
             if resp.status_code != 200:
                 raise ValueError(f"Request failed with status code {resp.status_code}")
