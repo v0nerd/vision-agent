@@ -1,7 +1,6 @@
 import inspect
 import logging
 import math
-import random
 import tempfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union, cast
@@ -33,6 +32,7 @@ from vision_agent.utils.execute import (
 )
 from vision_agent.utils.image_utils import convert_to_b64
 from vision_agent.utils.tools_doc import get_tool_documentation
+import secrets
 
 
 def get_tool_functions() -> Dict[str, Callable]:
@@ -83,7 +83,7 @@ def judge_od_results(
 
     # Randomly sample up to 10 detections
     num_samples = min(10, len(detections))
-    sampled_detections = random.sample(detections, num_samples)
+    sampled_detections = secrets.SystemRandom().sample(detections, num_samples)
     crops = []
     h, w = image.shape[:2]
 
